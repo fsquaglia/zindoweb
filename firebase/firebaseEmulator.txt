@@ -1,0 +1,8 @@
+//ZINDO
+firebase emulators:start --import=emulatorzindo --export-on-exit=emulatorzindo
+
+firebase login
+ Success! Logged in as zindoappweb@gmail.com
+
+- Se debe instalar java para correr el emulador de firebase localmente
+
