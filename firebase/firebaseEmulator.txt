@@ -6,3 +6,13 @@ firebase login
 
 - Se debe instalar java para correr el emulador de firebase localmente
 
+
+const { businessId } = await response.json();
+
+    if (typeof businessId !== "string" || !businessId) {
+      return NextResponse.rewrite(new URL("/404", req.url));
+    }
+
+    const tenantUrl = new URL(`/${hostname}`, req.url);
+    tenantUrl.search = url.search;
+    return NextResponse.rewrite(tenantUrl);
