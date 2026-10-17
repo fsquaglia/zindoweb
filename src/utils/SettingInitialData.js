@@ -142,7 +142,7 @@ export const dataWeb = [
   },
 ];
 
-// Datos para el Hero Main de la página principal
+//? Datos para el Hero Main de la página principal
 export const dataHeroMain = [
   {
     firstLine: {
@@ -180,6 +180,49 @@ export const dataHeroMain = [
     },
   },
 ];
+//! nuevo formato Hero Main para poder ordenar los componentes y agregar más de uno en la página principal
+export const componentHeroMain01 = {
+    id: "componentHeroMain01",
+  type: "mainHeroPrimary",
+  order: 100, // 👈 Llave numérica para el orden visual
+  data: [
+  {
+    firstLine: {
+      value: "Tu nueva aventura sobre ruedas",
+      showInputEdit: true,
+      textInputEdit: "Primera línea",
+      inputEditOrder: "a",
+      limitCharacters: 35,
+    },
+    secondLine: {
+      value: "Descubre nuestra colección exclusiva de vehículos",
+      showInputEdit: true,
+      textInputEdit: "Segunda línea",
+      inputEditOrder: "b",
+      limitCharacters: 50,
+    },
+    callToActionText: {
+      value: "Explora",
+      showInputEdit: true,
+      textInputEdit: "Texto de llamada a la acción",
+      inputEditOrder: "c",
+      limitCharacters: 10,
+    },
+    callToActionLink: {
+      value: "#vehicles",
+      showInputEdit: false,
+      textInputEdit: "Enlace de llamada a la acción",
+      inputEditOrder: "d",
+    },
+    urlImage: {
+      value: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+      showInputEdit: false,
+      textInputEdit: "Imagen de fondo Hero Main",
+      inputEditOrder: "e",
+    },
+  },
+],
+}
 
 // Datos para Features de la página principal
 export const dataFeatures = [
@@ -308,6 +351,144 @@ export const dataFeatures = [
     },
   },
 ];
+//! nuevo formato Features para poder ordenar los componentes y agregar más de uno en la página principal
+export const componentFeatures01 = {
+id: "componentFeatures01",
+type: "featuresGrid",
+order: 200, // 👈 Llave numérica para el orden visual
+data: [
+  {
+    titulo: {
+      value: "Vehículos nuevos",
+      showInputEdit: true,
+      textInputEdit: "Título de la característica",
+      inputEditOrder: "a",
+      limitCharacters: 50,
+    },
+    descripcion: {
+      value: "Amplia variedad de 0km disponibles",
+      showInputEdit: true,
+      textInputEdit: "Descripción corta de la característica",
+      inputEditOrder: "b",
+      limitCharacters: 60,
+    },
+    urlImage: {
+      value:
+        "https://images.unsplash.com/photo-1578182731845-259d92df3708?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      showInputEdit: false,
+      textInputEdit: "Imagen de la característica",
+      inputEditOrder: "c",
+    },
+    descripcionLarga: {
+      value:
+        "Ofrecemos una amplia gama de vehículos nuevos de las principales marcas del mercado, con las últimas tecnologías y características de seguridad.",
+      showInputEdit: true,
+      textInputEdit: "Descripción larga de la característica",
+      inputEditOrder: "d",
+      limitCharacters: 300,
+    },
+  },
+  {
+    titulo: {
+      value: "Vehículos usados",
+      showInputEdit: true,
+      textInputEdit: "Título de la característica",
+      inputEditOrder: "a",
+      limitCharacters: 50,
+    },
+    descripcion: {
+      value: "Usados seleccionados y garantizados",
+      showInputEdit: true,
+      textInputEdit: "Descripción corta de la característica",
+      inputEditOrder: "b",
+      limitCharacters: 60,
+    },
+    urlImage: {
+      value:
+        "https://images.unsplash.com/photo-1728885714581-ff2c95e4c1b9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      showInputEdit: false,
+      textInputEdit: "Imagen de la característica",
+      inputEditOrder: "c",
+    },
+    descripcionLarga: {
+      value:
+        "Contamos con un riguroso proceso de selección y revisión para garantizar que cada vehículo usado cumpla con nuestros altos estándares de calidad y confiabilidad.",
+      showInputEdit: true,
+      textInputEdit: "Descripción larga de la característica",
+      inputEditOrder: "d",
+      limitCharacters: 300,
+    },
+  },
+  {
+    titulo: {
+      value: "Financiación y planes",
+      showInputEdit: true,
+      textInputEdit: "Título de la característica",
+      inputEditOrder: "a",
+      limitCharacters: 50,
+    },
+    descripcion: {
+      value: "Planes flexibles a tu medida",
+      showInputEdit: true,
+      textInputEdit: "Descripción corta de la característica",
+      inputEditOrder: "b",
+      limitCharacters: 60,
+    },
+    urlImage: {
+      value:
+        "https://images.unsplash.com/photo-1671719367451-7bf05ae9549c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      showInputEdit: false,
+      textInputEdit: "Imagen de la característica",
+      inputEditOrder: "c",
+    },
+    descripcionLarga: {
+      value:
+        "Ofrecemos diversas opciones de financiación y planes de pago adaptados a tus necesidades, para que puedas adquirir el vehículo que deseas sin complicaciones.",
+      showInputEdit: true,
+      textInputEdit: "Descripción larga de la característica",
+      inputEditOrder: "d",
+      limitCharacters: 300,
+    },
+  },
+  {
+    titulo: {
+      value: "Servicio postventa",
+      showInputEdit: true,
+      textInputEdit: "Título de la característica",
+      inputEditOrder: "a",
+      limitCharacters: 50,
+    },
+    descripcion: {
+      value: "Nos ocupamos de tu vehículo",
+      showInputEdit: true,
+      textInputEdit: "Descripción corta de la característica",
+      inputEditOrder: "b",
+      limitCharacters: 60,
+    },
+    urlImage: {
+      value:
+        "https://images.unsplash.com/photo-1613214150132-9606e332d68e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      showInputEdit: false,
+      textInputEdit: "Imagen de la característica",
+      inputEditOrder: "c",
+    },
+    descripcionLarga: {
+      value:
+        "Nuestro compromiso no termina con la venta. Ofrecemos servicios de mantenimiento, reparaciones y repuestos originales para asegurar el óptimo rendimiento de tu vehículo.",
+      showInputEdit: true,
+      textInputEdit: "Descripción larga de la característica",
+      inputEditOrder: "d",
+      limitCharacters: 300,
+    },
+  },
+]
+};
+
+// Lista de componentes permitidos para la página principal
+export const allowedComponents = [
+  componentHeroMain01,
+  componentFeatures01,]
+
 
 //Logos de marcas para el carrusel
 export const dataLogosMarcas = [
@@ -1473,11 +1654,11 @@ export const catalogInitialData = [
 
 
 // Datos iniciales para los comercios/business
-
 export const initialBusinesses = [
   {
     id: "biz_barbini_001", // ID específico e invariable que vos elegís
     name: "Barbini Automotores",
+    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "vehiculos",
     currentDomain: "barbiniautomotores.com.ar",
     devDomain: "barbini.localhost", // Guardamos el de dev para el diccionario
@@ -1486,30 +1667,13 @@ export const initialBusinesses = [
     ],
     landingConfig: {
       theme: "light",
-      components: [
-        {
-          id: "hero-barbini",
-          type: "carousel",
-          images: [
-            "https://cloudinary.com",
-            "https://cloudinary.com"
-          ],
-          texts: { 
-            title: "Bienvenidos a Barbini Automotores", 
-            subtitle: "Tu próximo usado seleccionado está acá." 
-          }
-        },
-        {
-          id: "features-barbini",
-          type: "grid",
-          texts: { title: "Financiación Directa y Consignaciones" }
-        }
-      ]
+      components: [], // <<< aquí se insertan los componentes a mostrar, se debe modificar el orden numérico en cada key del componente
     }
   },
   {
     id: "biz_norte_002",
     name: "Norte Automotores",
+    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "vehiculos",
     currentDomain: "norteautomotores.com.ar",
     devDomain: "norte.localhost",
@@ -1518,29 +1682,13 @@ export const initialBusinesses = [
     ],
     landingConfig: {
       theme: "dark",
-      components: [
-        {
-          id: "hero-norte",
-          type: "carousel",
-          images: [
-            "https://cloudinary.com"
-          ],
-          texts: { 
-            title: "Norte Automotores", 
-            subtitle: "Líderes en camionetas y utilitarios." 
-          }
-        },
-        {
-          id: "features-norte",
-          type: "grid",
-          texts: { title: "Garantía mecánica por 6 meses" }
-        }
-      ]
+      components: [],
     }
   },
   {
     id: "biz_nicola_003",
     name: "Nicola Automotores",
+    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo." ,
     type: "vehiculos",
     currentDomain: "nicolaautomotores.com.ar",
     devDomain: "nicola.localhost",
@@ -1550,24 +1698,13 @@ export const initialBusinesses = [
     ],
     landingConfig: {
       theme: "custom-blue",
-      components: [
-        {
-          id: "hero-nicola",
-          type: "carousel",
-          images: [
-            "https://cloudinary.com"
-          ],
-          texts: { 
-            title: "Nicola Automotores", 
-            subtitle: "0km y usados multimarcas." 
-          }
-        }
-      ]
+      components: []
     }
   },
    {
     id: "biz_airaldo_004",
     name: "Veterinaria Airaldo",
+    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "veterinarias",
     currentDomain: "airaldo.com.ar",
     devDomain: "airaldo.localhost",
@@ -1577,20 +1714,27 @@ export const initialBusinesses = [
     ],
     landingConfig: {
       theme: "custom-blue",
-      components: [
-        {
-          id: "hero-airaldo",
-          type: "carousel",
-          images: [
-            "https://cloudinary.com"
-          ],
-          texts: { 
-            title: "Veterinaria Airaldo", 
-            subtitle: "Cuidando a tus mascotas con amor." 
-          }
-        }
-      ]
+      components: [],
     }
   }
 ];
 
+// Configuración de temas para la landing page, usando clases nativas de Tailwind CSS
+// Definís tu diccionario de temas con clases nativas de Tailwind
+export const CONFIG_TEMAS = {
+  "custom-blue": {
+    navbar: "bg-blue-900 border-blue-800 text-blue-100",
+    button: "bg-blue-500 hover:bg-blue-600 text-white",
+    footer: "bg-slate-950 text-slate-400"
+  },
+  "dark": {
+    navbar: "bg-slate-900 border-slate-800 text-slate-100",
+    button: "bg-cyan-500 hover:bg-cyan-600 text-slate-950",
+    footer: "bg-slate-950 text-slate-500"
+  },
+  "light": {
+    navbar: "bg-white border-slate-200 text-slate-800",
+    button: "bg-blue-600 hover:bg-blue-700 text-white",
+    footer: "bg-slate-100 text-slate-600"
+  }
+};

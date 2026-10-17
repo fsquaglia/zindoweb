@@ -1,14 +1,5 @@
-// import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
-// import { ref, get, child } from "firebase/database";
-// import { realtimeDB } from "@/firebase/config";
-
-// Configuración de la agencia "norte_automotores"
-const agenciaNorteAutomotores = {
-  nombre: "Norte Automotores",
-  landingComponents: ["main", "carousel", "features"],
-  // landingComponents: ["main", "features", "location", "footer"],
-};
+import { getBusinessDataForDomain } from "@/utils/getBusinessDataForDomain";
 
 // 1. IMPORTACIONES DINÁMICAS (Carga perezosa real)
 const Location = dynamic(() => import("@/components/location/Location"));
@@ -22,8 +13,8 @@ const Footer = dynamic(() => import("@/components/footer/Footer"));
 
 // 2. DICCIONARIO COMPLETAMENTE PLANO (Sin categorías, sin variantes)
 const COMPONENTES_DISPONIBLES = {
-  main: Main,
-  features: Features,
+  componentHeroMain01: Main,
+  componentFeatures01: Features,
   carousel: Carousel01,
   history: History,
   team: Team,
@@ -33,48 +24,46 @@ const COMPONENTES_DISPONIBLES = {
 };
 
 export default async function TenantHomePage({ params }) {
-  const { _tenant } = await params;
-  const tenantKey = _tenant.replace(/\./g, "_");
+  const resolvedParams = await params;
+  const dominioActual = resolvedParams._tenant; // ejemplo norte.localhost
 
-  // Traemos la info de la agencia
-  // const dbRef = ref(realtimeDB);
-  // const snapshot = await get(child(dbRef, `landings_info/${tenantKey}`));
+  // Obtenemos el businessId y los datos públicos del negocio para renderizar la página.
+  const tenantData = await getBusinessDataForDomain(dominioActual);
+  if (!tenantData) {
+    notFound();
+  }
+  const { businessData } = tenantData;
+  const components = businessData?.landingConfig?.components || [];
+  const orderedComponents = [...components].sort((componentA, componentB) => {
+    const orderA = Number.isFinite(componentA?.order)
+      ? componentA.order
+      : Number.POSITIVE_INFINITY;
+    const orderB = Number.isFinite(componentB?.order)
+      ? componentB.order
+      : Number.POSITIVE_INFINITY;
 
-  // if (!snapshot.exists()) {
-  //   notFound();
-  // }
-
-  // const configAgencia = snapshot.val();
-  const configAgencia = {}; //! eliminar luego de probar
-  // Obtenemos el array plano de la BDD (si no existe, dejamos un array vacío)
-  // ! descomentar la línea que sigue ya que estamos probando con la agencia "norte_automotores" y no con la BDD
-  // const landingComponents = configAgencia.landingComponents || [];
-  const landingComponents = agenciaNorteAutomotores.landingComponents || [];
-  console.log("landingComponents:", landingComponents);
+    return orderA - orderB;
+  });
 
   return (
     <div
-      className="w-full flex flex-col items-center min-h-screen gap-16"
-      style={{
-        "--color-primario": configAgencia.colores?.primario || "#06b6d4",
-        "--color-secundario": configAgencia.colores?.secundario || "#0f172a",
-      }}
+      className={`w-full flex flex-col items-center min-h-screen gap-16 ${businessData?.landingConfig?.theme.navbar || ""}`}
     >
       <main className="w-full flex flex-col gap-32 items-center">
-        {landingComponents.map((componentId, index) => {
+        {orderedComponents.map((component, index) => {
           // Buscamos directamente en nuestra lista plana
-          const ComponenteFinal = COMPONENTES_DISPONIBLES[componentId];
+          const ComponenteFinal = COMPONENTES_DISPONIBLES[component.id];
 
           // Si la BDD pide un componente que no existe o lo escribiste mal, lo ignora y no rompe la página
           if (!ComponenteFinal) return null;
 
           return (
             <section
-              key={`${componentId}-${index}`}
-              id={componentId}
+              key={`${component.id}-${index}`}
+              id={component.id}
               className="w-full"
             >
-              <ComponenteFinal datos={configAgencia} />
+              <ComponenteFinal datos={""} />
             </section>
           );
         })}

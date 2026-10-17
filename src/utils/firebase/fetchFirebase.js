@@ -377,21 +377,24 @@ export async function addDocIdRandom(collectionName, datosAgencia) {
   }
 }
 
-// TODO Esta función crea o sobrescribe un documento con un ID específico definido por vos (ej: el uid de Auth).
-export async function setDocIdManual(collectionName, docId, datos) {
-  if (!collectionName || !docId || !datos) {
+// * Agrega un componente al array landingConfig.components del documento indicado.
+export async function addComponentToBusiness(collectionName, docId, dataComponent) {
+  if (!collectionName || !docId || !dataComponent) {
     throw new Error(
-      "collectionName, docId y datos son obligatorios para guardar con ID manual.",
+      "collectionName, docId y dataComponent son obligatorios para guardar con ID manual.",
     );
   }
 
   try {
     // 1. Apuntamos al documento exacto combinando colección e ID
-    const docRef = doc(db, collectionName, docId);
+    const docRef = doc(firestoreDB, collectionName, docId);
 
-    // 2. Guardamos los datos.
-    // Usamos { merge: true } para que si el documento ya existe, solo actualice los campos nuevos y no borre los anteriores.
-    await setDoc(docRef, datos, { merge: true });
+    // arrayUnion conserva los componentes existentes y agrega el nuevo de forma atómica.
+    await setDoc(
+      docRef,
+      { landingConfig: { components: arrayUnion(dataComponent) } },
+      { merge: true },
+    );
 
     console.log(`¡Doc guardado con éxito bajo el ID manual: ${docId}!`);
     return docId;
