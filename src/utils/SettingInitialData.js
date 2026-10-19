@@ -142,7 +142,7 @@ export const dataWeb = [
   },
 ];
 
-//? Datos para el Hero Main de la página principal
+// // Datos para el Hero Main de la página principal
 export const dataHeroMain = [
   {
     firstLine: {
@@ -180,7 +180,7 @@ export const dataHeroMain = [
     },
   },
 ];
-//! nuevo formato Hero Main para poder ordenar los componentes y agregar más de uno en la página principal
+// Datos para el Hero Main de la página principal estilo 01
 export const componentHeroMain01 = {
     id: "componentHeroMain01",
   type: "mainHeroPrimary",
@@ -224,7 +224,51 @@ export const componentHeroMain01 = {
 ],
 }
 
-// Datos para Features de la página principal
+// Datos para el Hero Main de la página principal estilo 02
+export const componentHeroMain02 = {
+    id: "componentHeroMain02",
+  type: "mainHeroSecundary",
+  order: 100, // 👈 Llave numérica para el orden visual
+  data: [
+  {
+    firstLine: {
+      value: "Tu nueva aventura sobre ruedas 2",
+      showInputEdit: true,
+      textInputEdit: "Primera línea",
+      inputEditOrder: "a",
+      limitCharacters: 35,
+    },
+    secondLine: {
+      value: "Descubre nuestra colección exclusiva de vehículos 2",
+      showInputEdit: true,
+      textInputEdit: "Segunda línea",
+      inputEditOrder: "b",
+      limitCharacters: 50,
+    },
+    callToActionText: {
+      value: "Explora",
+      showInputEdit: true,
+      textInputEdit: "Texto de llamada a la acción",
+      inputEditOrder: "c",
+      limitCharacters: 10,
+    },
+    callToActionLink: {
+      value: "#vehicles",
+      showInputEdit: false,
+      textInputEdit: "Enlace de llamada a la acción",
+      inputEditOrder: "d",
+    },
+    urlImage: {
+      value: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+      showInputEdit: false,
+      textInputEdit: "Imagen de fondo Hero Main",
+      inputEditOrder: "e",
+    },
+  },
+],
+}
+
+// // Datos para Features de la página principal
 export const dataFeatures = [
   {
     titulo: {
@@ -351,7 +395,7 @@ export const dataFeatures = [
     },
   },
 ];
-//! nuevo formato Features para poder ordenar los componentes y agregar más de uno en la página principal
+// Datos para Features de la página principal
 export const componentFeatures01 = {
 id: "componentFeatures01",
 type: "featuresGrid",
@@ -487,7 +531,8 @@ data: [
 // Lista de componentes permitidos para la página principal
 export const allowedComponents = [
   componentHeroMain01,
-  componentFeatures01,]
+  componentFeatures01,
+  componentHeroMain02]
 
 
 //Logos de marcas para el carrusel
@@ -1702,14 +1747,14 @@ export const initialBusinesses = [
     }
   },
    {
-    id: "biz_airaldo_004",
-    name: "Veterinaria Airaldo",
-    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
-    type: "veterinarias",
-    currentDomain: "airaldo.com.ar",
-    devDomain: "airaldo.localhost",
+    id: "biz_centroMotos_004",
+    name: "Centro de Motos",
+    description: "Encontrá motos nuevas y usadas en Centro de Motos. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próxima moto.",
+    type: "vehiculos",
+    currentDomain: "centromotos.com.ar",
+    devDomain: "centromotos.localhost",
     admins: [
-      "uid_dev_airaldo_admin",
+      "uid_dev_centromotos_admin",
       "tu_propio_uid_de_firebase_auth" // Poné tu UID real acá para testear el dashboard
     ],
     landingConfig: {

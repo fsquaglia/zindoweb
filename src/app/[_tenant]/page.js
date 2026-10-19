@@ -3,8 +3,15 @@ import { getBusinessDataForDomain } from "@/utils/getBusinessDataForDomain";
 
 // 1. IMPORTACIONES DINÁMICAS (Carga perezosa real)
 const Location = dynamic(() => import("@/components/location/Location"));
-const Main = dynamic(() => import("@/components/main/Main"));
-const Features = dynamic(() => import("@/components/features/Features"));
+const ComponentHeroMain01 = dynamic(
+  () => import("@/components/main/ComponentHeroMain01"),
+);
+const ComponentHeroMain02 = dynamic(
+  () => import("@/components/main/ComponentHeroMain02"),
+);
+const ComponentFeatures01 = dynamic(
+  () => import("@/components/features/ComponentFeatures01"),
+);
 const Carousel01 = dynamic(() => import("@/components/carousel/Carousel01"));
 const History = dynamic(() => import("@/components/history/History"));
 const Team = dynamic(() => import("@/components/team/Team"));
@@ -13,14 +20,49 @@ const Footer = dynamic(() => import("@/components/footer/Footer"));
 
 // 2. DICCIONARIO COMPLETAMENTE PLANO (Sin categorías, sin variantes)
 const COMPONENTES_DISPONIBLES = {
-  componentHeroMain01: Main,
-  componentFeatures01: Features,
+  componentHeroMain01: ComponentHeroMain01,
+  componentHeroMain02: ComponentHeroMain02,
+  componentFeatures01: ComponentFeatures01,
   carousel: Carousel01,
   history: History,
   team: Team,
   location: Location,
   contact: Contact,
   footer: Footer,
+};
+
+const mapOnlyValues = (data) => {
+  // Si es un array, mapea cada elemento
+  if (Array.isArray(data)) {
+    return data.map((item) => {
+      const mappedItem = {};
+      for (const key in item) {
+        if (
+          item.hasOwnProperty(key) &&
+          typeof item[key] === "object" &&
+          item[key] !== null &&
+          item[key].value !== undefined
+        ) {
+          mappedItem[key] = item[key].value;
+        }
+      }
+      return mappedItem;
+    });
+  }
+
+  // Si es un objeto, mapea sus propiedades
+  const mappedData = {};
+  for (const key in data) {
+    if (
+      data.hasOwnProperty(key) &&
+      typeof data[key] === "object" &&
+      data[key] !== null &&
+      data[key].value !== undefined
+    ) {
+      mappedData[key] = data[key].value;
+    }
+  }
+  return mappedData;
 };
 
 export default async function TenantHomePage({ params }) {
@@ -57,13 +99,14 @@ export default async function TenantHomePage({ params }) {
           // Si la BDD pide un componente que no existe o lo escribiste mal, lo ignora y no rompe la página
           if (!ComponenteFinal) return null;
 
+          const onlyValuesData = mapOnlyValues(component.data);
           return (
             <section
               key={`${component.id}-${index}`}
               id={component.id}
               className="w-full"
             >
-              <ComponenteFinal datos={""} />
+              <ComponenteFinal data={onlyValuesData} />
             </section>
           );
         })}

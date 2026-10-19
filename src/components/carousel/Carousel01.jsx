@@ -4,9 +4,7 @@ import CarouselClient from "./CarouselClient";
 export default async function Carousel01() {
   const fetchCarouselSection = async (sectionName) => {
     try {
-      return await fetchDataFromAPIforSection(sectionName, "onlyValues", {
-        returnDefaultOnError: true,
-      });
+      return await fetchDataFromAPIforSection(sectionName, "onlyValues");
     } catch (error) {
       console.error(`Error loading carousel section (${sectionName}):`, error);
       return null;

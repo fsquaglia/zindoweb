@@ -3,9 +3,11 @@ import { fetchDataFromAPIforSection } from "@/utils/helpers";
 import { BiCollection } from "react-icons/bi";
 import Link from "next/link";
 
-export default async function Main() {
-  const data = await fetchDataFromAPIforSection("dataHeroMain");
-  if (!data || data.length === 0) return null;
+export default async function ComponentHeroMain02({ data = [] }) {
+  console.log("dataComponent in ComponentHeroMain02:", data);
+
+  // const data = await fetchDataFromAPIforSection("dataHeroMain");
+  // if (!data || data.length === 0) return null;
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
@@ -23,17 +25,17 @@ export default async function Main() {
       {/* Contenido */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1 className="text-5xl md:text-7xl font-bold text-white [text-stroke:2px_black]">
-          {data[0].firstLine || "¡Bienvenido a la web!"}
+          {data[0]?.firstLine || "¡Bienvenido a la web!"}
         </h1>
         <p className="mt-4 text-lg md:text-2xl text-white drop-shadow-[0_0_4px_black]">
-          {data[0].secondLine || "Encuentra lo que buscas."}
+          {data[0]?.secondLine || "Encuentra lo que buscas."}
         </p>
         <Link
           href="/catalogo"
           className="mt-6 flex cursor-pointer flex-row items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition hover:bg-red-700"
         >
           <BiCollection />
-          {data[0].callToActionText || "Artículos disponibles"}
+          {data[0]?.callToActionText || "Artículos disponibles"}
         </Link>
       </div>
     </div>
