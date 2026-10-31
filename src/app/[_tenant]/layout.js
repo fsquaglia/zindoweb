@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBusinessDataForDomain } from "@/utils/getBusinessDataForDomain";
 
-
 export async function generateMetadata({ params }, parent) {
   const { _tenant } = await params;
   const tenantData = await getBusinessDataForDomain(_tenant);
@@ -41,7 +40,7 @@ export default async function TenantLayout({ children, params }) {
 
   return (
     <div
-      className={`min-h-screen flex flex-col ${businessData?.landingConfig?.theme.navbar || ""}`}
+      className={`min-h-screen flex flex-col ${businessData?.landingConfig?.theme.background || ""}`}
     >
       {children}
     </div>

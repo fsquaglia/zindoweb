@@ -13,6 +13,16 @@ import {
   FaCopyright,
 } from "react-icons/fa";
 import { GrCatalog } from "react-icons/gr";
+import {
+  dataOfficialBrands01Autos,
+  dataOfficialBrands01Motos,
+} from "./dataChild/dataOfficialBrands01";
+import { dataFeatures01 } from "./dataChild/dataFeatures01";
+import { dataFeatures02 } from "./dataChild/dataFeatures02";
+import { dataHeroMain01 } from "./dataChild/dataHeroMain01";
+import { dataHeroMain02 } from "./dataChild/dataHeroMain02";
+import { dataComponentUsed01 } from "./dataChild/dataComponentUsed01";
+import { dataFinanceFeatures01 } from "./dataChild/dataFinanceFeatures";
 
 // Datos legales del comercio
 export const dataLegalCommerce = [
@@ -142,398 +152,82 @@ export const dataWeb = [
   },
 ];
 
-// // Datos para el Hero Main de la página principal
-export const dataHeroMain = [
-  {
-    firstLine: {
-      value: "Tu nueva aventura sobre ruedas",
-      showInputEdit: true,
-      textInputEdit: "Primera línea",
-      inputEditOrder: "a",
-      limitCharacters: 35,
-    },
-    secondLine: {
-      value: "Descubre nuestra colección exclusiva de vehículos",
-      showInputEdit: true,
-      textInputEdit: "Segunda línea",
-      inputEditOrder: "b",
-      limitCharacters: 50,
-    },
-    callToActionText: {
-      value: "Explora",
-      showInputEdit: true,
-      textInputEdit: "Texto de llamada a la acción",
-      inputEditOrder: "c",
-      limitCharacters: 10,
-    },
-    callToActionLink: {
-      value: "#vehicles",
-      showInputEdit: false,
-      textInputEdit: "Enlace de llamada a la acción",
-      inputEditOrder: "d",
-    },
-    urlImage: {
-      value: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-      showInputEdit: false,
-      textInputEdit: "Imagen de fondo Hero Main",
-      inputEditOrder: "e",
-    },
-  },
-];
+// ! estos son los nuevos componentes hasta la próxima línea comentada !
 // Datos para el Hero Main de la página principal estilo 01
-export const componentHeroMain01 = {
-    id: "componentHeroMain01",
+const componentHeroMain01 = {
+  id: "componentHeroMain01",
   type: "mainHeroPrimary",
   order: 100, // 👈 Llave numérica para el orden visual
-  data: [
-  {
-    firstLine: {
-      value: "Tu nueva aventura sobre ruedas",
-      showInputEdit: true,
-      textInputEdit: "Primera línea",
-      inputEditOrder: "a",
-      limitCharacters: 35,
-    },
-    secondLine: {
-      value: "Descubre nuestra colección exclusiva de vehículos",
-      showInputEdit: true,
-      textInputEdit: "Segunda línea",
-      inputEditOrder: "b",
-      limitCharacters: 50,
-    },
-    callToActionText: {
-      value: "Explora",
-      showInputEdit: true,
-      textInputEdit: "Texto de llamada a la acción",
-      inputEditOrder: "c",
-      limitCharacters: 10,
-    },
-    callToActionLink: {
-      value: "#vehicles",
-      showInputEdit: false,
-      textInputEdit: "Enlace de llamada a la acción",
-      inputEditOrder: "d",
-    },
-    urlImage: {
-      value: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-      showInputEdit: false,
-      textInputEdit: "Imagen de fondo Hero Main",
-      inputEditOrder: "e",
-    },
-  },
-],
-}
+  data: dataHeroMain01,
+};
 
-// Datos para el Hero Main de la página principal estilo 02
-export const componentHeroMain02 = {
-    id: "componentHeroMain02",
+// Datos para el Hero Main de la página principal estilo 02 con 3 imágenes
+const componentHeroMain02 = {
+  id: "componentHeroMain02",
   type: "mainHeroSecundary",
   order: 100, // 👈 Llave numérica para el orden visual
-  data: [
-  {
-    firstLine: {
-      value: "Tu nueva aventura sobre ruedas 2",
-      showInputEdit: true,
-      textInputEdit: "Primera línea",
-      inputEditOrder: "a",
-      limitCharacters: 35,
-    },
-    secondLine: {
-      value: "Descubre nuestra colección exclusiva de vehículos 2",
-      showInputEdit: true,
-      textInputEdit: "Segunda línea",
-      inputEditOrder: "b",
-      limitCharacters: 50,
-    },
-    callToActionText: {
-      value: "Explora",
-      showInputEdit: true,
-      textInputEdit: "Texto de llamada a la acción",
-      inputEditOrder: "c",
-      limitCharacters: 10,
-    },
-    callToActionLink: {
-      value: "#vehicles",
-      showInputEdit: false,
-      textInputEdit: "Enlace de llamada a la acción",
-      inputEditOrder: "d",
-    },
-    urlImage: {
-      value: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
-      showInputEdit: false,
-      textInputEdit: "Imagen de fondo Hero Main",
-      inputEditOrder: "e",
-    },
-  },
-],
-}
+  data: dataHeroMain02,
+};
 
-// // Datos para Features de la página principal
-export const dataFeatures = [
-  {
-    titulo: {
-      value: "Vehículos nuevos",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Amplia variedad de 0km disponibles",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1578182731845-259d92df3708?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Ofrecemos una amplia gama de vehículos nuevos de las principales marcas del mercado, con las últimas tecnologías y características de seguridad.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Vehículos usados",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Usados seleccionados y garantizados",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1728885714581-ff2c95e4c1b9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Contamos con un riguroso proceso de selección y revisión para garantizar que cada vehículo usado cumpla con nuestros altos estándares de calidad y confiabilidad.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Financiación y planes",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Planes flexibles a tu medida",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1671719367451-7bf05ae9549c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Ofrecemos diversas opciones de financiación y planes de pago adaptados a tus necesidades, para que puedas adquirir el vehículo que deseas sin complicaciones.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Servicio postventa",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Nos ocupamos de tu vehículo",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1613214150132-9606e332d68e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Nuestro compromiso no termina con la venta. Ofrecemos servicios de mantenimiento, reparaciones y repuestos originales para asegurar el óptimo rendimiento de tu vehículo.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-];
 // Datos para Features de la página principal
-export const componentFeatures01 = {
-id: "componentFeatures01",
-type: "featuresGrid",
-order: 200, // 👈 Llave numérica para el orden visual
-data: [
-  {
-    titulo: {
-      value: "Vehículos nuevos",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Amplia variedad de 0km disponibles",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1578182731845-259d92df3708?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Ofrecemos una amplia gama de vehículos nuevos de las principales marcas del mercado, con las últimas tecnologías y características de seguridad.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Vehículos usados",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Usados seleccionados y garantizados",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1728885714581-ff2c95e4c1b9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Contamos con un riguroso proceso de selección y revisión para garantizar que cada vehículo usado cumpla con nuestros altos estándares de calidad y confiabilidad.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Financiación y planes",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Planes flexibles a tu medida",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1671719367451-7bf05ae9549c?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Ofrecemos diversas opciones de financiación y planes de pago adaptados a tus necesidades, para que puedas adquirir el vehículo que deseas sin complicaciones.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-  {
-    titulo: {
-      value: "Servicio postventa",
-      showInputEdit: true,
-      textInputEdit: "Título de la característica",
-      inputEditOrder: "a",
-      limitCharacters: 50,
-    },
-    descripcion: {
-      value: "Nos ocupamos de tu vehículo",
-      showInputEdit: true,
-      textInputEdit: "Descripción corta de la característica",
-      inputEditOrder: "b",
-      limitCharacters: 60,
-    },
-    urlImage: {
-      value:
-        "https://images.unsplash.com/photo-1613214150132-9606e332d68e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      showInputEdit: false,
-      textInputEdit: "Imagen de la característica",
-      inputEditOrder: "c",
-    },
-    descripcionLarga: {
-      value:
-        "Nuestro compromiso no termina con la venta. Ofrecemos servicios de mantenimiento, reparaciones y repuestos originales para asegurar el óptimo rendimiento de tu vehículo.",
-      showInputEdit: true,
-      textInputEdit: "Descripción larga de la característica",
-      inputEditOrder: "d",
-      limitCharacters: 300,
-    },
-  },
-]
+const componentFeatures01 = {
+  id: "componentFeatures01",
+  type: "featuresGrid",
+  order: 200, // 👈 Llave numérica para el orden visual
+  data: dataFeatures01,
+};
+
+// Datos para el componente features horizontal
+const componentFeatures02 = {
+  id: "componentFeatures02",
+  type: "featuresHorizontal",
+  order: 300, // 👈 Llave numérica para el orden visual
+  data: dataFeatures02,
+};
+
+// Datos para el componente de la sección de vende tu usado
+const componentUsed01 = {
+  id: "componentUsed01",
+  type: "vendeTuUsado",
+  order: 300, // 👈 Llave numérica para el orden visual
+  data: dataComponentUsed01,
+};
+
+// Datos para el componente Marcas de Confianza de autos
+const componentOfficialBrands01Autos = {
+  id: "componentOfficialBrands01Autos",
+  type: "officialBrands01Autos",
+  order: 400, // 👈 Llave numérica para el orden visual
+  data: dataOfficialBrands01Autos,
+};
+
+const componentOfficialBrands01Motos = {
+  id: "componentOfficialBrands01Motos",
+  type: "officialBrands01Motos",
+  order: 500, // 👈 Llave numérica para el orden visual
+  data: dataOfficialBrands01Motos,
+};
+
+const componentFinanceFeatures01 = {
+  id: "componentFinanceFeatures01",
+  type: "componentFinanceFeatures01",
+  order: 500, // 👈 Llave numérica para el orden visual
+  data: dataFinanceFeatures01,
 };
 
 // Lista de componentes permitidos para la página principal
 export const allowedComponents = [
   componentHeroMain01,
+  componentHeroMain02,
   componentFeatures01,
-  componentHeroMain02]
+  componentFeatures02,
+  componentUsed01,
+  componentOfficialBrands01Autos,
+  componentOfficialBrands01Motos,
+  componentFinanceFeatures01,
+];
 
+// ! estos son los nuevos componentes desde la anterior línea comentada !
 
 //Logos de marcas para el carrusel
 export const dataLogosMarcas = [
@@ -1697,14 +1391,16 @@ export const catalogInitialData = [
   },
 ];
 
-
 // Datos iniciales para los comercios/business
 export const initialBusinesses = [
   {
     id: "biz_barbini_001", // ID específico e invariable que vos elegís
     name: "Barbini Automotores",
-    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
+    description:
+      "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "vehiculos",
+    provinceName: "Santa Fe",
+    cityName: "San Cristóbal",
     currentDomain: "barbiniautomotores.com.ar",
     devDomain: "barbini.localhost", // Guardamos el de dev para el diccionario
     admins: [
@@ -1713,55 +1409,62 @@ export const initialBusinesses = [
     landingConfig: {
       theme: "light",
       components: [], // <<< aquí se insertan los componentes a mostrar, se debe modificar el orden numérico en cada key del componente
-    }
+    },
   },
   {
     id: "biz_norte_002",
     name: "Norte Automotores",
-    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
+    description:
+      "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "vehiculos",
+    provinceName: "Santa Fe",
+    cityName: "San Cristóbal",
     currentDomain: "norteautomotores.com.ar",
     devDomain: "norte.localhost",
-    admins: [
-      "uid_dev_norte_admin"
-    ],
+    admins: ["uid_dev_norte_admin"],
     landingConfig: {
       theme: "dark",
       components: [],
-    }
+    },
   },
   {
     id: "biz_nicola_003",
     name: "Nicola Automotores",
-    description: "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo." ,
+    description:
+      "Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.",
     type: "vehiculos",
+    provinceName: "Santa Fe",
+    cityName: "San Cristóbal",
     currentDomain: "nicolaautomotores.com.ar",
     devDomain: "nicola.localhost",
     admins: [
       "uid_dev_nicola_admin",
-      "tu_propio_uid_de_firebase_auth" // Poné tu UID real acá para testear el dashboard
-    ],
-    landingConfig: {
-      theme: "custom-blue",
-      components: []
-    }
-  },
-   {
-    id: "biz_centroMotos_004",
-    name: "Centro de Motos",
-    description: "Encontrá motos nuevas y usadas en Centro de Motos. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próxima moto.",
-    type: "vehiculos",
-    currentDomain: "centromotos.com.ar",
-    devDomain: "centromotos.localhost",
-    admins: [
-      "uid_dev_centromotos_admin",
-      "tu_propio_uid_de_firebase_auth" // Poné tu UID real acá para testear el dashboard
+      "tu_propio_uid_de_firebase_auth", // Poné tu UID real acá para testear el dashboard
     ],
     landingConfig: {
       theme: "custom-blue",
       components: [],
-    }
-  }
+    },
+  },
+  {
+    id: "biz_centroMotos_004",
+    name: "Centro de Motos",
+    description:
+      "Encontrá motos nuevas y usadas en Centro de Motos. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próxima moto.",
+    type: "vehiculos",
+    provinceName: "Santa Fe",
+    cityName: "San Cristóbal",
+    currentDomain: "centromotos.com.ar",
+    devDomain: "centromotos.localhost",
+    admins: [
+      "uid_dev_centromotos_admin",
+      "tu_propio_uid_de_firebase_auth", // Poné tu UID real acá para testear el dashboard
+    ],
+    landingConfig: {
+      theme: "custom-blue",
+      components: [],
+    },
+  },
 ];
 
 // Configuración de temas para la landing page, usando clases nativas de Tailwind CSS
@@ -1770,16 +1473,22 @@ export const CONFIG_TEMAS = {
   "custom-blue": {
     navbar: "bg-blue-900 border-blue-800 text-blue-100",
     button: "bg-blue-500 hover:bg-blue-600 text-white",
-    footer: "bg-slate-950 text-slate-400"
+    footer: "bg-slate-950 text-slate-400",
+    horizontalBar: "bg-blue-500 text-white",
+    background: "bg-blue-500",
   },
-  "dark": {
+  dark: {
     navbar: "bg-slate-900 border-slate-800 text-slate-100",
     button: "bg-cyan-500 hover:bg-cyan-600 text-slate-950",
-    footer: "bg-slate-950 text-slate-500"
+    footer: "bg-slate-950 text-slate-500",
+    horizontalBar: "bg-cyan-800 text-slate-950",
+    background: "bg-cyan-500",
   },
-  "light": {
+  light: {
     navbar: "bg-white border-slate-200 text-slate-800",
     button: "bg-blue-600 hover:bg-blue-700 text-white",
-    footer: "bg-slate-100 text-slate-600"
-  }
+    footer: "bg-slate-100 text-slate-600",
+    horizontalBar: "bg-blue-600 text-white",
+    background: "bg-white",
+  },
 };
