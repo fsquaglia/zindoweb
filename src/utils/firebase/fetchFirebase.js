@@ -39,7 +39,7 @@ import {
 } from "firebase/database";
 
 import { revalidateSomePath } from "../actions/actions";
-import {initialBusinesses} from "../SettingInitialData";
+import { initialBusinesses } from "../SettingInitialData";
 
 //!REALTIME
 //?Traer datos de un nodo específico de realtime
@@ -378,7 +378,11 @@ export async function addDocIdRandom(collectionName, datosAgencia) {
 }
 
 // * Agrega un componente al array landingConfig.components del documento indicado.
-export async function addComponentToBusiness(collectionName, docId, dataComponent) {
+export async function addComponentToBusiness(
+  collectionName,
+  docId,
+  dataComponent,
+) {
   if (!collectionName || !docId || !dataComponent) {
     throw new Error(
       "collectionName, docId y dataComponent son obligatorios para guardar con ID manual.",
@@ -441,26 +445,4 @@ export async function searchBusiness(dataBusiness) {
     console.error("Error en la búsqueda:", error);
     throw error;
   }
-}
-
-// Esta función recorre el array initialBusinesses y crea los documentos en Firestore, además de actualizar el diccionario de dominios.
-export async function seedBusinesses() {
-  const dictRef = doc(firestoreDB, "config", "domainDictionary");
-  const nuevosMapeosDominios = {};
-
-  for (const business of initialBusinesses) {
-    const { id, devDomain, currentDomain, ...dataToSave } = business;
-    const businessRef = doc(firestoreDB, "businesses", id);
-
-    await setDoc(businessRef, { id, currentDomain, ...dataToSave });
-
-    nuevosMapeosDominios[currentDomain] = id;
-    nuevosMapeosDominios[devDomain] = id;
-  }
-
-  await setDoc(
-    dictRef,
-    { mappings: nuevosMapeosDominios },
-    { merge: true }
-  );
 }

@@ -174,24 +174,47 @@ const Svg3 = () => {
     </svg>
   );
 };
+const arraySvg = [Svg1, Svg2, Svg3];
 
-const container = ({ id, title, text }) => {
+const container = ({ id, title, text }, index) => {
   return (
     <div
       key={id}
-      className={`flex flex-col items-center px-6 py-8 hover:bg-slate-50 hover:shadow-md transition-colors duration-500 rounded-xl`}
+      className="
+        /* 1. ESTRUCTURA Y FONDO CON DEGRADÉ COMBINADO (Negro a Azulado) */
+        flex flex-col items-center px-6 py-8 rounded-2xl 
+        bg-gradient-to-tr from-neutral-950 via-neutral-950 to-sky-900/40 
+        border border-neutral-800/60
+        
+        /* 2. EFECTO DE RESPLANDOR PERIMETRAL */
+        shadow-[0_0_20px_-5px_rgba(14,165,233,0.15)]
+        
+        /* 3. TRANSICIÓN E INTERACTIVIDAD AL HACER HOVER */
+        transition-all duration-500 ease-in-out
+        hover:border-sky-500/40 
+        hover:from-neutral-950 hover:via-neutral-950 hover:to-sky-900/50
+        hover:shadow-[0_0_35px_-2px_rgba(14,165,233,0.3)] hover:-translate-y-1
+      "
     >
       {/* Contenedor del Icono SVG */}
-      <div className="w-28 h-28 flex items-center justify-center mb-6">
-        <Svg1 />
+      <div className="w-28 h-28 flex items-center justify-center mb-6 text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.3)]">
+        {/* renderizar el SVG correspondiente al índice */}
+        {arraySvg[index]()}
       </div>
-      <h3 className="text-2xl font-black text-slate-800 tracking-wider uppercase mb-3">
+
+      {/* Título */}
+      <h3 className="text-2xl font-black text-white tracking-wider uppercase mb-3">
         {title}
       </h3>
-      <p className="text-slate-500 text-sm leading-relaxed max-w-sm">{text}</p>
+
+      {/* Texto descriptivo */}
+      <p className="text-neutral-400 text-sm leading-relaxed max-w-sm text-center">
+        {text}
+      </p>
     </div>
   );
 };
+
 export default async function ComponentCompanyIdentity01({ data = [] }) {
   console.log(data);
 
@@ -212,13 +235,13 @@ export default async function ComponentCompanyIdentity01({ data = [] }) {
     { id: 3, title: "valores", text: valoresText },
   ];
   return (
-    <section className="w-full bg-white py-16 px-4">
+    <section className="w-full py-16 px-4 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* CONTENEDOR PRINCIPAL CON DIVISIONES IGUAL A TU IMAGEN */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4 items-start text-center">
           {valores.map((item, index) => (
             <RevealOnView key={item.id} delay={index * 120}>
-              {container(item)}
+              {container(item, index)}
             </RevealOnView>
           ))}
         </div>
