@@ -1,80 +1,223 @@
-// import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
-// import { ref, get, child } from "firebase/database";
-// import { realtimeDB } from "@/firebase/config";
-
-// Configuración de la agencia "norte_automotores"
-const agenciaNorteAutomotores = {
-  nombre: "Norte Automotores",
-  landingComponents: ["main", "carousel", "features"],
-  // landingComponents: ["main", "features", "location", "footer"],
-};
+import { getBusinessDataForDomain } from "@/utils/getBusinessDataForDomain";
+import ComponentHeroVideo01 from "@/components/main/ComponentHeroVideo01";
+import ComponentCompanyIdentity01 from "@/components/history/ComponentCompanyIdentity01";
 
 // 1. IMPORTACIONES DINÁMICAS (Carga perezosa real)
 const Location = dynamic(() => import("@/components/location/Location"));
-const Main = dynamic(() => import("@/components/main/Main"));
-const Features = dynamic(() => import("@/components/features/Features"));
+const ComponentHeroMain01 = dynamic(
+  () => import("@/components/main/ComponentHeroMain01"),
+);
+const ComponentHeroMain02 = dynamic(
+  () => import("@/components/main/ComponentHeroMain02"),
+);
+const ComponentFeatures01 = dynamic(
+  () => import("@/components/features/ComponentFeatures01"),
+);
+const ComponentFeatures02 = dynamic(
+  () => import("@/components/features/ComponentFeatures02"),
+);
 const Carousel01 = dynamic(() => import("@/components/carousel/Carousel01"));
 const History = dynamic(() => import("@/components/history/History"));
 const Team = dynamic(() => import("@/components/team/Team"));
 const Contact = dynamic(() => import("@/components/contact/Contact"));
 const Footer = dynamic(() => import("@/components/footer/Footer"));
+const ComponentUsed01 = dynamic(
+  () => import("@/components/used/ComponentUsed01"),
+);
+const ComponentOfficialBrands01Motos = dynamic(
+  () => import("@/components/brands/OfficialBrands01"),
+);
+const ComponentOfficialBrands01Autos = dynamic(
+  () => import("@/components/brands/OfficialBrands01"),
+);
+const ComponentFinanceFeatures01 = dynamic(
+  () => import("@/components/features/ComponentFinanceFeatures01"),
+);
 
 // 2. DICCIONARIO COMPLETAMENTE PLANO (Sin categorías, sin variantes)
 const COMPONENTES_DISPONIBLES = {
-  main: Main,
-  features: Features,
+  componentHeroMain01: ComponentHeroMain01,
+  componentHeroMain02: ComponentHeroMain02,
+  componentFeatures01: ComponentFeatures01,
+  componentFeatures02: ComponentFeatures02,
   carousel: Carousel01,
   history: History,
   team: Team,
   location: Location,
   contact: Contact,
   footer: Footer,
+  componentUsed01: ComponentUsed01,
+  componentOfficialBrands01Motos: ComponentOfficialBrands01Motos,
+  componentOfficialBrands01Autos: ComponentOfficialBrands01Autos,
+  componentFinanceFeatures01: ComponentFinanceFeatures01,
+};
+
+const mapOnlyValues = (data) => {
+  // Si es un array, mapea cada elemento
+  if (Array.isArray(data)) {
+    return data.map((item) => {
+      const mappedItem = {};
+      for (const key in item) {
+        if (
+          item.hasOwnProperty(key) &&
+          typeof item[key] === "object" &&
+          item[key] !== null &&
+          item[key].value !== undefined
+        ) {
+          mappedItem[key] = item[key].value;
+        }
+      }
+      return mappedItem;
+    });
+  }
+
+  // Si es un objeto, mapea sus propiedades
+  const mappedData = {};
+  for (const key in data) {
+    if (
+      data.hasOwnProperty(key) &&
+      typeof data[key] === "object" &&
+      data[key] !== null &&
+      data[key].value !== undefined
+    ) {
+      mappedData[key] = data[key].value;
+    }
+  }
+  return mappedData;
 };
 
 export default async function TenantHomePage({ params }) {
-  const { _tenant } = await params;
-  const tenantKey = _tenant.replace(/\./g, "_");
+  const resolvedParams = await params;
+  const dominioActual = resolvedParams._tenant; // ejemplo norte.localhost
 
-  // Traemos la info de la agencia
-  // const dbRef = ref(realtimeDB);
-  // const snapshot = await get(child(dbRef, `landings_info/${tenantKey}`));
+  // Obtenemos el businessId y los datos públicos del negocio para renderizar la página.
+  const tenantData = await getBusinessDataForDomain(dominioActual);
+  if (!tenantData) {
+    notFound();
+  }
 
-  // if (!snapshot.exists()) {
-  //   notFound();
+  //   tenantdata  {
+  //   businessId: 'biz_norte_002',
+  //   businessData: {
+  //     id: 'biz_norte_002',
+  //     currentDomain: 'norteautomotores.com.ar',
+  //     name: 'Norte Automotores',
+  //     description: 'Encontrá autos nuevos y usados en Norte Automotores. Conocé nuestro catálogo y recibí asesoramiento para elegir tu próximo vehículo.',
+  //     type: 'vehiculos',
+  //     landingConfig: { theme: [Object], components: [Array] }
+  //   }
   // }
 
-  // const configAgencia = snapshot.val();
-  const configAgencia = {}; //! eliminar luego de probar
-  // Obtenemos el array plano de la BDD (si no existe, dejamos un array vacío)
-  // ! descomentar la línea que sigue ya que estamos probando con la agencia "norte_automotores" y no con la BDD
-  // const landingComponents = configAgencia.landingComponents || [];
-  const landingComponents = agenciaNorteAutomotores.landingComponents || [];
-  console.log("landingComponents:", landingComponents);
+  // ***************************************************************************************
+  //   landingConfig {
+  //   theme: {
+  //     navbar: 'bg-white border-slate-200 text-slate-800',
+  //     button: 'bg-blue-600 hover:bg-blue-700 text-white',
+  //     footer: 'bg-slate-100 text-slate-600',
+  //     horizontalBar: 'bg-blue-600 text-white',
+  //     background: 'bg-white'
+  //   },
+  //   components: [
+  //     {
+  //       id: 'componentUsed01',
+  //       type: 'vendeTuUsado',
+  //       order: 300,
+  //       data: [Array]
+  //     },
+  //     {
+  //       id: 'componentHeroMain02',
+  //       type: 'mainHeroSecundary',
+  //       order: 100,
+  //       data: [Array]
+  //     },
+  //     {
+  //       id: 'componentFeatures02',
+  //       type: 'featuresHorizontal',
+  //       order: 300,
+  //       data: [Array]
+  //     }
+  //   ]
+  // }
+  // ***************************************************************************************
+  // ? data de algún comonente
+  // console.log(tenantData.businessData.landingConfig.components[0].data);
+  // [
+  // {
+  //   tituloGeneral: {
+  //     value: 'Recibimos tu vehículo usado',
+  //     showInputEdit: true,
+  //     textInputEdit: 'Título general de la sección',
+  //     inputEditOrder: 'a',
+  //     limitCharacters: 50
+  //   }
+  // },
+  // {
+  //   titulo: {
+  //     value: 'Rápido BDD',
+  //     showInputEdit: true,
+  //     textInputEdit: 'Título de la tarjeta 1',
+  //     inputEditOrder: 'a',
+  //     limitCharacters: 50
+  //   },...
+  // ***************************************************************************************
+  // ? data de algún comonente ya mapeado con mapOnlyValues
+  // [
+  // { tituloGeneral: 'Recibimos tu vehículo usado' },
+  // {
+  //   titulo: 'Rápido BDD',
+  //   descripcion: 'Amplia variedad de 0km disponibles',
+  //   urlImage: 'https://images.unsplash.com/photo-1578182731845-259d92df3708?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  // },
+  // {
+  //   titulo: 'Sencillo BDD',
+  //   descripcion: 'Tus datos están protegidos, vendé tu vehículo sin riesgos. BDD',
+  //   urlImage: 'https://images.unsplash.com/photo-1728885714581-ff2c95e4c1b9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  // },...
+
+  const theme = tenantData.businessData.landingConfig.theme || {};
+  // theme ya se pasa al componente como un objeto (ver detalles en SettingInitialData)
+  // no hace falta importar CONFIG_TEMAS en los componentes
+  // theme = {
+  //   navbar: 'bg-slate-900 border-slate-800 text-slate-100',
+  //   button: 'bg-cyan-500 hover:bg-cyan-600 text-slate-950',
+  //   footer: 'bg-slate-950 text-slate-500'......
+  // }
+
+  const { businessData } = tenantData;
+  const components = businessData?.landingConfig?.components || [];
+  const orderedComponents = [...components].sort((componentA, componentB) => {
+    const orderA = Number.isFinite(componentA?.order)
+      ? componentA.order
+      : Number.POSITIVE_INFINITY;
+    const orderB = Number.isFinite(componentB?.order)
+      ? componentB.order
+      : Number.POSITIVE_INFINITY;
+
+    return orderA - orderB;
+  });
 
   return (
-    <div
-      className="w-full flex flex-col items-center min-h-screen gap-16"
-      style={{
-        "--color-primario": configAgencia.colores?.primario || "#06b6d4",
-        "--color-secundario": configAgencia.colores?.secundario || "#0f172a",
-      }}
-    >
+    <div className={`w-full flex flex-col items-center min-h-screen gap-16}`}>
+      <ComponentHeroVideo01 theme={theme} />
+      <ComponentCompanyIdentity01 theme={theme} />
+
       <main className="w-full flex flex-col gap-32 items-center">
-        {landingComponents.map((componentId, index) => {
+        {orderedComponents.map((component, index) => {
           // Buscamos directamente en nuestra lista plana
-          const ComponenteFinal = COMPONENTES_DISPONIBLES[componentId];
+          const ComponenteFinal = COMPONENTES_DISPONIBLES[component.id];
 
           // Si la BDD pide un componente que no existe o lo escribiste mal, lo ignora y no rompe la página
           if (!ComponenteFinal) return null;
 
+          const onlyValuesData = mapOnlyValues(component.data);
           return (
             <section
-              key={`${componentId}-${index}`}
-              id={componentId}
+              key={`${component.id}-${index}`}
+              id={component.id}
               className="w-full"
             >
-              <ComponenteFinal datos={configAgencia} />
+              <ComponenteFinal data={onlyValuesData} theme={theme} />
             </section>
           );
         })}

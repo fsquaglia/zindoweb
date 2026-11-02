@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { seedBusinesses } from "@/utils/firebase/fetchFirebase";
 
-export async function GET() {
+export async function POST() {
   try {
     await seedBusinesses();
 

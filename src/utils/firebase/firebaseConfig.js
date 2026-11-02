@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getStorage, connectStorageEmulator } from "firebase/storage"; //almacenamiento de imágenes
-import { getDatabase, connectDatabaseEmulator } from "firebase/database"; //realtime database para los Servicios
+import { initializeApp, getApp, getApps } from "firebase/app";
+// import { getStorage, connectStorageEmulator } from "firebase/storage"; //almacenamiento de imágenes
+// import { getDatabase, connectDatabaseEmulator } from "firebase/database"; //realtime database para los Servicios
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore"; //firestore como BD de colecciones y documentos
 const databaseURL_Realtime = process.env.NEXT_PUBLIC_LOCAL_EMULATOR_databaseURL;
 
@@ -16,29 +16,37 @@ let firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
+
 // Initialize Firebase with dynamic configuration
 let app;
-//if (typeof window !== 'undefined' && window.location.hostname === "localhost") {
+let firestoreDB; // 👈 Declaramos la variable acá arriba
+
 if (process.env.NEXT_PUBLIC_FIREBASE_EMULATORS === "emulators") {
   // Use local emulator settings
   const localConfig = {
     ...firebaseConfig,
     databaseURL: databaseURL_Realtime,
   };
-  app = initializeApp(localConfig);
-  connectFirestoreEmulator(getFirestore(app), "localhost", 8080);
-  //connectStorageEmulator(getStorage(app), "127.0.0.1", 9199);
-  console.log("Conectado con emuladores");
+
+  // Inicializar la app de forma segura evitando duplicados
+  app = getApps().length === 0 ? initializeApp(localConfig) : getApp();
+
+  // OBTENER LA INSTANCIA PRIMERO (Requisito de Firebase)
+  firestoreDB = getFirestore(app);
+
+  // CONECTAR AL EMULADOR UNA SOLA VEZ
+  if (!global.firestoreEmulatorConnected) {
+    connectFirestoreEmulator(firestoreDB, "127.0.0.1", 8080);
+    global.firestoreEmulatorConnected = true;
+    console.log("Conectado con emuladores");
+  }
 } else {
   // Use production settings
-  app = initializeApp(firebaseConfig);
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+  firestoreDB = getFirestore(app); // 👈 En producción se inicializa directo sin emulador
   console.log("Conectado sin Emuladores");
 }
 
-// Initialize Firebase
-// const imagesDB = getStorage(app);
-// const realtimeDB = getDatabase(app);
-const firestoreDB = getFirestore(app);
-
+// Exportamos exactamente lo que tus componentes y APIs ya están esperando recibir
 export { app, firestoreDB };
 // export { app, imagesDB, realtimeDB, firestoreDB };
