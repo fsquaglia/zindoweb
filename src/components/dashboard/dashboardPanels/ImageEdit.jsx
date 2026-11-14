@@ -13,7 +13,7 @@ function ImageEdit({
   };
   return (
     <div className="flex flex-col justify-center items-center gap-4">
-      <h2 className="text-md font-medium text-gray-800">{titleImage}</h2>
+      <h2 className="text-md font-medium ">{titleImage}</h2>
 
       <div className="relative w-full max-w-2xl">
         {!urlImage ? (

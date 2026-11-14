@@ -8,8 +8,10 @@ export async function proxy(req) {
   // Limpiamos el puerto en caso de estar en entorno de desarrollo (localhost:3000)
   hostname = hostname.split(":")[0].toLowerCase();
 
+  // console.log("path " + url.pathname);
   // Dejamos pasar recursos estáticos y endpoints sin validación de dominio.
   if (
+    url.pathname.startsWith("/auth") ||
     url.pathname === "/_next" ||
     url.pathname.startsWith("/_next/") ||
     url.pathname === "/api" ||
@@ -37,17 +39,20 @@ export async function proxy(req) {
   endpointUrl.searchParams.set("domain", hostname);
 
   try {
-    const response = await fetch(endpointUrl); 
+    const response = await fetch(endpointUrl);
     //const response = await fetch(endpointUrl, { cache: "no-store" }); //! dejamos cache: "no-store" o no??
 
     if (!response.ok) {
       if (response.status >= 500) {
         console.error(
-          `Error al validar el dominio: ${response.status} ${response.statusText}`
+          `Error al validar el dominio: ${response.status} ${response.statusText}`,
         );
         return NextResponse.json(
-          { success: false, error: "La validación del dominio no está disponible." },
-          { status: 503 }
+          {
+            success: false,
+            error: "La validación del dominio no está disponible.",
+          },
+          { status: 503 },
         );
       }
 
@@ -64,8 +69,11 @@ export async function proxy(req) {
   } catch (error) {
     console.error("Error al validar el dominio:", error);
     return NextResponse.json(
-      { success: false, error: "La validación del dominio no está disponible." },
-      { status: 503 }
+      {
+        success: false,
+        error: "La validación del dominio no está disponible.",
+      },
+      { status: 503 },
     );
   }
 }

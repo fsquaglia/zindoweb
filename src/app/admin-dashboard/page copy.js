@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Header from "@/components/dashboard/Header";
 import { getAllowedViewIds } from "@/components/dashboard/helpers";
-import PanelRenderer from "@/components/dashboard/dashboardPanels/PanelRenderer";
+// import PanelRenderer from "@/components/dashboard/dashboardPanels/PanelRenderer";
 import Agency from "@/components/agency/Agency";
 
 export default async function Dashboard({ params, searchParams }) {
@@ -39,7 +39,7 @@ export default async function Dashboard({ params, searchParams }) {
           <Sidebar role={roleFromSession} view={view} />
         </div>
         <main className="flex-1 overflow-auto">
-          <PanelRenderer panel={content} />
+          {/* <PanelRenderer panel={content} /> */}
         </main>
       </div>
       <div className="h-18  flex items-center justify-center">
