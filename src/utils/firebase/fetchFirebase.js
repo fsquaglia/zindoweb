@@ -341,6 +341,7 @@ export async function getCatalogItemsFirestore({
 
 // obtener un documento específico de Firestore por su ID y colección
 export async function getDocument(collectionName, documentId) {
+  console.log(collectionName, documentId);
   if (!collectionName || !documentId) {
     throw new Error("collectionName y documentId son obligatorios.");
   }
@@ -348,10 +349,40 @@ export async function getDocument(collectionName, documentId) {
   try {
     const documentRef = doc(firestoreDB, collectionName, documentId);
     const documentSnapshot = await getDoc(documentRef);
-
+    console.log(documentSnapshot.exists() ? documentSnapshot.data() : null);
     return documentSnapshot.exists() ? documentSnapshot.data() : null;
   } catch (error) {
     console.error("Error al obtener el documento de Firestore:", error);
+    throw error;
+  }
+}
+
+// Obtiene de Firestore los documentos de una colección cuyo campo "type"
+// coincide exactamente con el valor indicado.
+export async function getDocumentsByType(collectionName, type) {
+  if (
+    typeof collectionName !== "string" ||
+    !collectionName.trim() ||
+    typeof type !== "string" ||
+    !type.trim()
+  ) {
+    throw new Error("collectionName y type son obligatorios.");
+  }
+
+  try {
+    const documentsQuery = query(
+      collection(firestoreDB, collectionName),
+      where("type", "==", type),
+    );
+
+    const snapshot = await getDocs(documentsQuery);
+
+    return snapshot.docs.map((documentSnapshot) => ({
+      ...documentSnapshot.data(),
+      id: documentSnapshot.id,
+    }));
+  } catch (error) {
+    console.error("Error al obtener documentos por tipo:", error);
     throw error;
   }
 }
@@ -373,76 +404,6 @@ export async function addDocIdRandom(collectionName, datosAgencia) {
     return docRef.id;
   } catch (error) {
     console.error("Error al guardar el documento:", error);
-    throw error;
-  }
-}
-
-// * Agrega un componente al array landingConfig.components del documento indicado.
-export async function addComponentToBusiness(
-  collectionName,
-  docId,
-  dataComponent,
-) {
-  if (!collectionName || !docId || !dataComponent) {
-    throw new Error(
-      "collectionName, docId y dataComponent son obligatorios para guardar con ID manual.",
-    );
-  }
-
-  try {
-    // 1. Apuntamos al documento exacto combinando colección e ID
-    const docRef = doc(firestoreDB, collectionName, docId);
-
-    // arrayUnion conserva los componentes existentes y agrega el nuevo de forma atómica.
-    await setDoc(
-      docRef,
-      { landingConfig: { components: arrayUnion(dataComponent) } },
-      { merge: true },
-    );
-
-    console.log(`¡Doc guardado con éxito bajo el ID manual: ${docId}!`);
-    return docId;
-  } catch (error) {
-    console.error("Error al guardar el documento con ID manual:", error);
-    throw error; // Relanzamos para capturarlo en la interfaz (UI)
-  }
-}
-
-// TODO Esta función busca un documento en la colección "business" por el campo "idNameBusiness" y devuelve su ID si existe, o null si no.
-export async function searchBusiness(dataBusiness) {
-  // Validamos que venga el campo clave para el control de duplicados
-  if (!dataBusiness.idNameBusiness) {
-    throw new Error(
-      "El campo idNameBusiness es obligatorio para verificar duplicados.",
-    );
-  }
-
-  try {
-    const coleccionRef = collection(db, "business");
-
-    // 1. Creamos la consulta para buscar si ya existe ese idNameBusiness
-    const q = query(
-      coleccionRef,
-      where("idNameBusiness", "==", dataBusiness.idNameBusiness),
-    );
-
-    // 2. Ejecutamos la búsqueda en Firestore
-    const querySnapshot = await getDocs(q);
-
-    // 3. Verificamos si trajo algún resultado
-    if (!querySnapshot.empty) {
-      // Tomamos el ID del que ya existe
-      const docExistente = querySnapshot.docs[0];
-      console.log(
-        `⚠️ La agencia '${dataBusiness.idNameBusiness}' ya existe con el ID: ${docExistente.id}. No se duplica.`,
-      );
-      return docExistente.id;
-    }
-
-    // 4. Si el snapshot está vacío, devolvemos null para indicar que no existe y se puede crear
-    return null;
-  } catch (error) {
-    console.error("Error en la búsqueda:", error);
     throw error;
   }
 }

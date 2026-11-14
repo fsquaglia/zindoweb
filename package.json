@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seedbusiness": "node scripts/seedBusiness.mjs"
+    "seedbusiness": "node scripts/seedBusiness.mjs",
+    "addbusiness": "node scripts/addOneBusiness.mjs",
+    "addComponent": "node scripts/seedComponentsToBusiness.mjs",
+    "addAllComponents": "node scripts/seedAllComponentsToBusiness.mjs",
+    "seedtypes": "node scripts/seedTypes.mjs",
+    "seedAll": "node scripts/seedAll.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

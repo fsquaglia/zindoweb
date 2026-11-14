@@ -151,11 +151,7 @@ const ObjectComponent = ({ data, index, onInputChange, onImageChange }) => {
     : [];
 
   return (
-    <div
-      className={`flex flex-col items-center w-full p-4 ${
-        index % 2 === 0 ? "" : "bg-gray-200"
-      }`}
-    >
+    <div className="flex flex-col items-center w-full p-4">
       {data?.urlImage?.value && (
         <ImageEdit
           urlImage={data.urlImage.value}
@@ -177,6 +173,8 @@ const ObjectComponent = ({ data, index, onInputChange, onImageChange }) => {
           </div>
         ))}
       </div>
+      {/* insertar línea horizontal */}
+      <hr className="w-full max-w-3xl border-t border-gray-300 my-4" />
     </div>
   );
 };

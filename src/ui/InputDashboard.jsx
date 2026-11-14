@@ -40,7 +40,7 @@ export default function InputDashboard({
     const sharedProps = {
       value,
       maxLength: limitCharacters,
-      className: `w-full px-3 py-2 border rounded-md bg-gray-50 text-sm sm:text-base ${
+      className: `w-full px-3 py-2 border rounded-md  text-sm sm:text-base ${
         isInvalid ? "border-red-500" : "border-gray-300"
       }`,
       onChange: (e) => onChange(e.target.value),
